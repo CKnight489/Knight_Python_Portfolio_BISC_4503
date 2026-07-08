@@ -770,7 +770,7 @@ print(numpy.mean(data, axis = 1))
      5.95  6.275 5.7   6.1   6.825 5.975 6.725 5.7   6.25  6.4   7.05  5.9  ]
 
 ## Visualizing Patient Data
-Visualization of the patient data from the above data
+Visualization of the patient data from the "Analyzing Patient Data"
 
 ```python
 import numpy
