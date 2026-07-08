@@ -1809,3 +1809,291 @@ numpy.loadtxt('inflammation-01.csv', delimiter = ',')
            [0., 0., 0., ..., 0., 2., 0.],
            [0., 0., 1., ..., 1., 1., 0.]])
 
+## Defensive Programming
+Learned how to use the "assert" function in Python
+
+```python
+numbers = [1.5,2.3,0.7,-0.001,4.4]
+total = 0.0
+for num in numbers:
+    assert num > 0.0, 'data should only contain positive values'
+    total += num
+print('total is:', total)
+```
+
+
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    <ipython-input-1-4eb258997795> in <module>
+          2 total = 0.0
+          3 for num in numbers:
+    ----> 4     assert num > 0.0, 'data should only contain positive values'
+          5     total += num
+          6 print('total is:', total)
+
+
+    AssertionError: data should only contain positive values
+
+
+
+```python
+def normalize_rectangle(rect):
+    """Normalizes a rectangle so that it is at the origin and 1.0 units long on its longest axes.
+    input should be of the format (x0, y0, x1, y1).
+    (x0, y0) and (x1, y1) define the lower left and upper right corners of the rectangle respectively."""
+    assert len(rect) == 4, 'rectangles must contain 4 coordinates'
+    x0, y0, x1, y1 = rect
+    assert x0 < x1, 'invalid X coordinates'
+    assert y0 < y1, 'invalid Y coordinates'
+    
+    dx = x1 - x0
+    dy = y1 - y0
+    if dx > dy:
+        scaled = dy / dx
+        upper_x, upper_y = 1.0, scaled
+    else:
+        scaled = dx / dy
+        upper_x, upper_y = scaled, 1.0
+    assert 0 < upper_x <= 1.0, 'calculated upper X coordinate invalid'
+    assert 0 < upper_y <= 1.0, 'calculated upper Y coordinate invalid'
+    
+    return(0, 0, upper_x, upper_y)
+```
+
+
+```python
+print(normalize_rectangle( (0.0, 1.0, 2.0) ))
+```
+
+
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    <ipython-input-5-f9d109085db1> in <module>
+    ----> 1 print(normalize_rectangle( (0.0, 1.0, 2.0) ))
+    
+
+    <ipython-input-4-d37475316a19> in normalize_rectangle(rect)
+          3     input should be of the format (x0, y0, x1, y1).
+          4     (x0, y0) and (x1, y1) define the lower left and upper right corners of the rectangle respectively."""
+    ----> 5     assert len(rect) == 4, 'rectangles must contain 4 coordinates'
+          6     x0, y0, x1, y1 = rect
+          7     assert x0 < x1, 'invalid X coordinates'
+
+
+    AssertionError: rectangles must contain 4 coordinates
+
+
+
+```python
+print(normalize_rectangle( (4.0, 2.0, 1.0, 5.0) ))
+```
+
+
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    <ipython-input-6-f7e0d48bdfd0> in <module>
+    ----> 1 print(normalize_rectangle( (4.0, 2.0, 1.0, 5.0) ))
+    
+
+    <ipython-input-4-d37475316a19> in normalize_rectangle(rect)
+          5     assert len(rect) == 4, 'rectangles must contain 4 coordinates'
+          6     x0, y0, x1, y1 = rect
+    ----> 7     assert x0 < x1, 'invalid X coordinates'
+          8     assert y0 < y1, 'invalid Y coordinates'
+          9 
+
+
+    AssertionError: invalid X coordinates
+
+
+
+```python
+print(normalize_rectangle( (0.0, 0.0, 1.0, 5.0)))
+```
+
+    (0, 0, 0.2, 1.0)
+
+
+
+```python
+print(normalize_rectangle( (0.0, 0.0, 5.0, 1.0)))
+```
+
+
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    <ipython-input-8-83721d2716e7> in <module>
+    ----> 1 print(normalize_rectangle( (0.0, 0.0, 5.0, 1.0)))
+    
+
+    <ipython-input-4-d37475316a19> in normalize_rectangle(rect)
+         17         upper_x, upper_y = scaled, 1.0
+         18     assert 0 < upper_x <= 1.0, 'calculated upper X coordinate invalid'
+    ---> 19     assert 0 < upper_y <= 1.0, 'calculated upper Y coordinate invalid'
+         20 
+         21     return(0, 0, upper_x, upper_y)
+
+
+    AssertionError: calculated upper Y coordinate invalid
+
+## Transcribing DNA
+Learned how to transribe DNA into RNA using Python
+
+```python
+# Prompt user to enter the input Fasta file name
+
+input_file_name = input("Enter the name of the input Fasta file")
+```
+
+    Enter the name of the input Fasta file SUMO_gene_sequence.txt
+
+
+
+```python
+# Open the input Fasta file and read the DNA sequence
+
+with open(input_file_name, "r") as input_file:
+    dna_sequence = ""
+    for line in input_file:
+        if line.startswith(">"):
+            continue
+        dna_sequence += line.strip()
+```
+
+
+```python
+# Transcribe the DNA to RNA
+
+rna_sequence = ""
+for nucleotide in dna_sequence:
+    if nucleotide == "T":
+        rna_sequence += "U"
+    else:
+        rna_sequence += nucleotide
+```
+
+
+```python
+# Prompt user to enter the output file name
+
+output_file_name = input("Enter the name of the output file: ")
+```
+
+    Enter the name of the output file:  SUMO
+
+
+
+```python
+# Save the RNA sequence to a text file
+
+with open(output_file_name, "w") as output_file:
+    output_file.write(rna_sequence)
+    print("The RNA sequence has been saved to {output_file_name}")
+```
+
+    The RNA sequence has been saved to SUMO
+
+
+
+```python
+print(rna_sequence)
+```
+
+    AUGUCUGACGAAAAGAAGGGAGGUGAGACCGAGCACAUCAACCUGAAGGUCCUCGGCCAGGACAACGCCGUCGUCCAGUUCAAGAUCAAGAAGCACACACCCUUGAGGAAGCUGAUGAACGCCUACUGCGACCGUGCCGGACUCUCCAUGCAGGUGGUGCGCUUCCGUUUCGACGGACAGCCCAUCAACGAGAACGACACUCCGACCUCGCUGGAGAUGGAGGAGGGCGACACCAUCGAGGUUUACCAGCAGCAGACUGGUGGCGCUCCAUAAAUGUCUGACGAAAAGAAGGGAGGUGAGACCGAGCACAUCAACCUGAAGGUCCUCGGCCAGGACAACGCCGUCGUCCAGUUCAAGAUCAAGAAGCACACACCCUUGAGGAAGCUGAUGAACGCCUACUGCGACCGUGCCGGACUCUCCAUGCAGGUGGUGCGCUUCCGUUUCGACGGACAGCCCAUCAACGAGAACGACACUCCGACCUCGCUGGAGAUGGAGGAGGGCGACACCAUCGAGGUUUACCAGCAGCAGACUGGUGGCGCUCCAUAA
+
+
+## Translating RNA
+Learned how to translate RNA into protein sequences using Python
+
+```python
+# Prompt the user to enter the input RNA file name
+
+input_file_name = input("Enter the name of the input RNA file:")
+```
+
+    Enter the name of the input RNA file: SUMO_RNA.txt
+
+
+
+```python
+# Open the input RNA file and read the RNA sequence
+
+with open(input_file_name, "r") as input_file:
+    rna_sequence = input_file.read().strip()
+```
+
+
+```python
+# Define the codon table
+
+codon_table = {
+    "UUU": "F", "UUC": "F", "UUA": "L", "UUG": "L",
+    "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S",
+    "UAU": "Y", "UAC": "Y", "UAA": "*", "UAG": "*",
+    "UGU": "C", "UGC": "C", "UGA": "*", "UGG": "W",
+    "CUU": "L", "CUC": "L", "CUA": "L", "CUG": "L",
+    "CCU": "P", "CCC": "P", "CCA": "P", "CCG": "P",
+    "CAU": "H", "CAC": "H", "CAA": "Q", "CAG": "Q",
+    "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R",
+    "AUU": "I", "AUC": "I", "AUA": "I", "AUG": "M",
+    "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T",
+    "AAU": "N", "AAC": "N", "AAA": "K", "AAG": "K",
+    "AGU": "S", "AGC": "S", "AGA": "R", "AGG": "R",
+    "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V",
+    "GCU": "A", "GCC": "A", "GCA": "A", "GCG": "A",
+    "GAU": "D", "GAC": "D", "GAA": "E", "GAG": "E",
+    "GGU": "G", "GGC": "G", "GGA": "G", "GGG": "G"
+    
+}
+```
+
+
+```python
+# Translate RNA to protein
+
+protein_sequence = " "
+for i in range(0, len(rna_sequence), 3):
+    codon = rna_sequence[i:i+3]
+    if len(codon) == 3:
+        amino_acid = codon_table[codon]
+        if amino_acid == "*":
+            break
+        protein_sequence += amino_acid
+```
+
+
+```python
+# Prompt the user to enter the output file name
+
+output_file_name = input("Enter the name of the output file: ")
+```
+
+    Enter the name of the output file:  SUMO_protein.txt
+
+
+
+```python
+# Save the protein sequence to a text file
+
+with open(output_file_name, "w") as output_file:
+    output_file.write(protein_sequence)
+    print(f"The protein sequence has been saved to {output_file_name}")
+```
+
+    The protein sequence has been saved to SUMO_protein.txt
+
+
+
+```python
+print(protein_sequence)
+```
+
+     MSDEKKGGETEHINLKVLGQDNAVVQFKIKKHTPLRKLMNAYCDRAGLSMQVVRFRFDGQPINENDTPTSLEMEEGDTIEVYQQQTGGAP
