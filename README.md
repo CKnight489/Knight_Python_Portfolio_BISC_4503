@@ -1207,3 +1207,55 @@ else:
 import numpy
 ```
 
+## Making Choices 2
+Continued to learn and use "if/else/elif" functions in Python
+
+```python
+import numpy
+```
+
+
+```python
+data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+```
+
+
+```python
+max_inflammation_0 = numpy.amax(data, axis = 0)[0]
+```
+
+
+```python
+max_inflammation_20 = numpy.amax(data, axis = 0)[20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Suspicious looking maximum')
+
+elif numpy.sum(numpy.amin(data, axis = 0)) == 0:
+    print('Minimum adds to zero')
+    
+else:
+    print('is OK')
+```
+
+    Suspicious looking maximum
+
+
+
+```python
+data = numpy.loadtxt(fname = 'inflammation-03.csv', delimiter = ',')
+
+max_inflammation_0 = numpy.amax(data, axis = 0)[0]
+max_inflammation_20 = numpy.amax(data, axis = 0)[20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Suspicious looking maximum')
+elif numpy.sum(numpy.amin(data, axis = 0)) == 0:
+    print('Minimum adds to zero')
+else:
+    print('is OK')
+```
+
+    Minimum adds to zero
+
+
