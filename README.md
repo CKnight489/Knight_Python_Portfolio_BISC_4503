@@ -3,6 +3,8 @@ Portfolio of python code for BISC 4503
 
 ## Jupyter Notebooks 1 & 2
 
+Introduction to coding in Python
+
 ```python
 %matplotlib inline
 import pandas as pd
@@ -640,3 +642,81 @@ print(numpy.mean(data, axis = 1))
      5.925 6.15  6.075 5.75  5.975 5.725 6.3   5.9   6.75  5.925 7.225 6.15
      5.95  6.275 5.7   6.1   6.825 5.975 6.725 5.7   6.25  6.4   7.05  5.9  ]
 
+## Visualizing Patient Data
+
+Visualization of the patient data from the above data
+
+```python
+import numpy
+data = numpy.loadtxt(fname = 'inflammation-01.csv', delimiter = ',')
+```
+
+
+```python
+# Heat map of patient inflammation over time
+import matplotlib.pyplot
+image = matplotlib.pyplot.imshow(data)
+matplotlib.pyplot.show()
+```
+
+
+<img width="178" height="251" alt="output_1_0" src="https://github.com/user-attachments/assets/f095d55e-509c-45ce-8504-0c17714dfb09" />
+
+
+
+```python
+# Average inflammation over time
+avg_inflammation = numpy.mean(data, axis = 0)
+avg_plot = matplotlib.pyplot.plot(avg_inflammation)
+matplotlib.pyplot.show()
+```
+
+
+<img width="368" height="248" alt="output_2_0" src="https://github.com/user-attachments/assets/f5cefcde-3d77-4946-81f8-30c4ae1d8ebc" />
+
+
+
+```python
+max_plot = matplotlib.pyplot.plot(numpy.amax(data, axis =0))
+matplotlib.pyplot.show()
+```
+
+
+<img width="378" height="248" alt="output_3_0" src="https://github.com/user-attachments/assets/29428ed3-5753-42ca-8f2d-b1471a92ccd8" />
+
+
+
+```python
+min_plot = matplotlib.pyplot.plot(numpy.amin(data, axis =0))
+matplotlib.pyplot.show()
+```
+
+
+<img width="362" height="248" alt="output_4_0" src="https://github.com/user-attachments/assets/19563183-491b-4f89-a8a4-d9598bec3f82" />
+
+
+
+```python
+fig = matplotlib.pyplot.figure(figsize = (10.0, 3.0))
+
+axes1 = fig.add_subplot(1, 3, 1)
+axes2 = fig.add_subplot(1, 3, 2)
+axes3 = fig.add_subplot(1, 3, 3)
+
+axes1.set_ylabel('average')
+axes1.plot(numpy.mean(data, axis = 0))
+
+axes2.set_ylabel('max')
+axes2.plot(numpy.amax(data, axis = 0))
+
+axes3.set_ylabel('min')
+axes3.plot(numpy.amin(data, axis = 0))
+
+fig.tight_layout()
+
+matplotlib.pyplot.savefig('inflammation.png')
+matplotlib.pyplot.show()
+```
+
+
+<img width="712" height="208" alt="output_5_0" src="https://github.com/user-attachments/assets/1597e358-9994-434d-8e08-4eadf35c2479" />
