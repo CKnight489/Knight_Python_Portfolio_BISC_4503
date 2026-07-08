@@ -1390,7 +1390,7 @@ print_temperatures()
     Temp in Fahrenheit was: 212.0
     Temp in Kelvin was: 373.15
 
-## Creating Functions 2
+## Creating Functions 2, 3, & 4
 Continued learning how to create and use functions in Python
 
 ```python
