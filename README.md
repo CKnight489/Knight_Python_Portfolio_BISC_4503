@@ -2,7 +2,6 @@
 Portfolio of python code for BISC 4503
 
 ## Jupyter Notebooks 1 & 2
-
 Introduction to coding in Python
 
 ```python
@@ -427,9 +426,137 @@ fig.tight_layout()
 
 <img width="989" height="280" alt="output_18_0" src="https://github.com/user-attachments/assets/28dd80d5-3b56-4427-bd81-653fb5e1bd66" />
 
+## Python Fundamentals
+Learning the fundamentals of using Python
+
+```python
+# Any python interpreter can be used as a calculator
+3 + 5 * 4
+```
+
+
+
+
+    23
+
+
+
+
+```python
+# Lets save a value to a variable
+weight_kg = 60
+```
+
+
+```python
+print(weight_kg)
+```
+
+    60
+
+
+
+```python
+# Weight0 = valid
+# 0weight = invalid
+# weight and Weight are different
+```
+
+
+```python
+# Types of data
+# There are three common types of data
+# Integer numbers
+# floating point numbers
+# Strings
+```
+
+
+```python
+# Floating point Number
+weight_kg = 60.3
+```
+
+
+```python
+# String comprised of letters
+patient_name = "Jon Smith"
+```
+
+
+```python
+# String comprised of numers
+patient_id = '001'
+```
+
+
+```python
+# Use variables in python
+weight_lb = 2.2 * weight_kg
+
+print(weight_lb)
+```
+
+    132.66
+
+
+
+```python
+# Add a prefix to patient id
+patient_id = 'inflam_' + patient_id
+print(patient_id)
+```
+
+    inflam_001
+
+
+
+```python
+# Combine print statements
+print(patient_id, 'weight in kilograms:', weight_kg)
+```
+
+    inflam_001 weight in kilograms: 60.3
+
+
+
+```python
+# Call a function inside another function
+print(type(60.3))
+print(type(patient_id))
+```
+
+    <class 'float'>
+    <class 'str'>
+
+
+
+```python
+# Also do calculations inside print function
+print('weight in lbs:', 2.2 * weight_kg)
+```
+
+    weight in lbs: 132.66
+
+
+
+```python
+print(weight_kg)
+```
+
+    60.3
+
+
+
+```python
+weight_kg = 65.0
+print('weight in kilograms is now:', weight_kg)
+```
+
+    weight in kilograms is now: 65.0
+
 
 ## Analyzing Patient Data
-
 In this analysis, inflammation data of multiple patients was looked at.
 
 ```python
@@ -643,7 +770,6 @@ print(numpy.mean(data, axis = 1))
      5.95  6.275 5.7   6.1   6.825 5.975 6.725 5.7   6.25  6.4   7.05  5.9  ]
 
 ## Visualizing Patient Data
-
 Visualization of the patient data from the above data
 
 ```python
